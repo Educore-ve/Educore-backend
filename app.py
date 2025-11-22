@@ -50,7 +50,6 @@ def actualizar_licencias(licencias, sha):
     r = requests.put(GH_API, headers=gh_headers(), json=payload)
     return r.status_code in (200, 201)
 
-# 🔹 Normalización igual que en tu cliente C++
 def normalizar_clave(clave: str) -> str:
     return "".join(ch.upper() for ch in clave if ch.isalnum())
 
@@ -66,7 +65,6 @@ def validar_clave():
     if error:
         return jsonify({ "valida": False, "motivo": error }), 502
 
-    # Normalizar tanto la clave recibida como las del JSON
     clave_norm = normalizar_clave(clave)
     licencias_norm = { normalizar_clave(k): v for k, v in licencias.items() }
 
